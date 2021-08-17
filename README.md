@@ -52,4 +52,5 @@ deno run --allow-net --allow-read ./server.ts
 
 ACHTUNG: Zur Ausführung des Game-Servers wird ein Zertifikat und Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
 - https://*meine-deno-server-ip*:8080
+
 separat als Ausnahme hinzugefügt werden. Legt die beiden Dateien mit als fullchain.pem und privkey.pem in Eurem Home-Verzeichnis ab.
