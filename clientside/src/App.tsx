@@ -42,6 +42,8 @@ function App() {
   }
 
   const onGameClosedFired = () => {
+    const canvas: HTMLCanvasElement = (document.querySelector('#screen canvas') as HTMLCanvasElement)
+    canvas.parentNode?.removeChild(canvas)
     setStep(SubmitMode.ChatMode)
   }
 

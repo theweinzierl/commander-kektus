@@ -64,7 +64,6 @@ game.PlayerEntity = me.Entity.extend({
 
         if(me.input.isKeyPressed('close') && game.mode === "multiplayer"){
             game.netCom.doGameCloseRequest();
-            me.state.change(me.state.GAME_END);
         }
 
         if(game.mode === "multiplayer"){

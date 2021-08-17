@@ -22778,12 +22778,14 @@ function App() {
         _bridge.startGame(startParams);
     };
     const onGameClosedFired = ()=>{
+        const canvas = document.querySelector('#screen canvas');
+        canvas.parentNode?.removeChild(canvas);
         setStep(_main.SubmitMode.ChatMode);
     };
     return step !== _main.SubmitMode.StartGame ? /*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/App.tsx",
-            lineNumber: 50
+            lineNumber: 52
         },
         __self: this,
         children: [
@@ -22791,14 +22793,14 @@ function App() {
                 className: "w3-card w3-center",
                 __source: {
                     fileName: "src/App.tsx",
-                    lineNumber: 51
+                    lineNumber: 53
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
                     className: "game-title",
                     __source: {
                         fileName: "src/App.tsx",
-                        lineNumber: 52
+                        lineNumber: 54
                     },
                     __self: this,
                     children: "Commander Kektus"
@@ -22808,7 +22810,7 @@ function App() {
                 className: "w3-content w3-center w3-padding-top-24",
                 __source: {
                     fileName: "src/App.tsx",
-                    lineNumber: 54
+                    lineNumber: 56
                 },
                 __self: this,
                 children: [
@@ -22816,7 +22818,7 @@ function App() {
                         submit: submitPlayerName,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 55
+                            lineNumber: 57
                         },
                         __self: this
                     }),
@@ -22824,7 +22826,7 @@ function App() {
                         submit: submitGameMode,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 56
+                            lineNumber: 58
                         },
                         __self: this
                     }),
@@ -22833,7 +22835,7 @@ function App() {
                         playerName: startParams.playerName,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 57
+                            lineNumber: 59
                         },
                         __self: this
                     })
@@ -70344,10 +70346,7 @@ game.KektusThorn = me.Entity.extend({
         this.font.draw(renderer, game.playerName, -10, 0);
     },
     update: function(dt) {
-        if (me.input.isKeyPressed('close') && game.mode === "multiplayer") {
-            game.netCom.doGameCloseRequest();
-            me.state.change(me.state.GAME_END);
-        }
+        if (me.input.isKeyPressed('close') && game.mode === "multiplayer") game.netCom.doGameCloseRequest();
         if (game.mode === "multiplayer") {
             //put onNetUpdate, if you want to limit update rate
             if (this.updateCounter === 0) {
