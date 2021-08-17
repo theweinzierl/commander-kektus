@@ -16,7 +16,7 @@ https://commander.kektus.de
 
 ## Technische Aspekte
 
-Zwei Unterprojekte...
+Eine Einführung in den Aufbau und die technischen Hintergründe findet Ihr unter https://youtu.be/9AYlJAeGg6Y.
 
 ### 1. Clientside
 - Engine: melon.js (https://www.melonjs.org/)
@@ -50,6 +50,6 @@ Wenn noch nicht geschehen: clone und cd nach /serverside/ . Dann:
 deno run --allow-net --allow-read ./server.ts 
 ```
 
-ACHTUNG: Wir nutzen ein selbstsigniertes Zertifikat, weil manche Browser nur eine verschlüsselte Websocket-Verbindung zulassen. Unter Umständen müssen im Browser die Zertifikate unter
+ACHTUNG: Zur Ausführung des Game-Servers wird ein Zertifikat und Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
 - https://*meine-deno-server-ip*:8080
-separat als Ausnahme hinzugefügt werden.
+separat als Ausnahme hinzugefügt werden. Legt die beiden Dateien mit als fullchain.pem und privkey.pem in Eurem Home-Verzeichnis ab.
