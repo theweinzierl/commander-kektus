@@ -13,7 +13,6 @@ import goodies from './entities/goodies';
 
 export function startGame(startParams) {
 
-    console.log(startParams)
     game.setPlayerName(startParams.playerName);   
     
     if(startParams.gameMode === 1){

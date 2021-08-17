@@ -55,6 +55,7 @@ export default game = {
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.UP, "jump", true);
         me.input.bindKey(me.input.KEY.SPACE, "shoot", true);
+        me.input.bindKey(me.input.KEY.ESC, "close");
 
         me.state.change(me.state.PLAY);
 

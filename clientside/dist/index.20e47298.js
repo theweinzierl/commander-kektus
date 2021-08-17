@@ -22769,6 +22769,7 @@ function App() {
             startParams.host = host;
             startParams.netCommunicator = new _netCommunicatorDefault.default(startParams.playerName, startParams.host);
             startParams.netCommunicator.onOpponentConnected = onOpponentConnected;
+            startParams.netCommunicator.onGameClosedFired = onGameClosedFired;
             setStep(_main.SubmitMode.ChatMode);
         }
     };
@@ -22776,10 +22777,13 @@ function App() {
         setStep(_main.SubmitMode.StartGame);
         _bridge.startGame(startParams);
     };
+    const onGameClosedFired = ()=>{
+        setStep(_main.SubmitMode.ChatMode);
+    };
     return step !== _main.SubmitMode.StartGame ? /*#__PURE__*/ _jsxRuntime.jsxs("div", {
         __source: {
             fileName: "src/App.tsx",
-            lineNumber: 45
+            lineNumber: 50
         },
         __self: this,
         children: [
@@ -22787,14 +22791,14 @@ function App() {
                 className: "w3-card w3-center",
                 __source: {
                     fileName: "src/App.tsx",
-                    lineNumber: 46
+                    lineNumber: 51
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
                     className: "game-title",
                     __source: {
                         fileName: "src/App.tsx",
-                        lineNumber: 47
+                        lineNumber: 52
                     },
                     __self: this,
                     children: "Commander Kektus"
@@ -22804,7 +22808,7 @@ function App() {
                 className: "w3-content w3-center w3-padding-top-24",
                 __source: {
                     fileName: "src/App.tsx",
-                    lineNumber: 49
+                    lineNumber: 54
                 },
                 __self: this,
                 children: [
@@ -22812,7 +22816,7 @@ function App() {
                         submit: submitPlayerName,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 50
+                            lineNumber: 55
                         },
                         __self: this
                     }),
@@ -22820,7 +22824,7 @@ function App() {
                         submit: submitGameMode,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 51
+                            lineNumber: 56
                         },
                         __self: this
                     }),
@@ -22829,7 +22833,7 @@ function App() {
                         playerName: startParams.playerName,
                         __source: {
                             fileName: "src/App.tsx",
-                            lineNumber: 52
+                            lineNumber: 57
                         },
                         __self: this
                     })
@@ -41975,7 +41979,6 @@ var _obstaclesDefault = parcelHelpers.interopDefault(_obstacles);
 var _goodies = require("./entities/goodies");
 var _goodiesDefault = parcelHelpers.interopDefault(_goodies);
 function startGame(startParams) {
-    console.log(startParams);
     _gameDefault.default.setPlayerName(startParams.playerName);
     if (startParams.gameMode === 1) {
         _gameDefault.default.setMode("multiplayer");
@@ -53733,7 +53736,7 @@ var global = arguments[3];
             /**
         * @ignore
         */ draw: function draw(renderer) {
-                renderer.drawImage(this.iconCanvas, renderer.getWidth() / 2, this.pos.y);
+            //renderer.drawImage('./bg.webp', renderer.getWidth() / 2, this.pos.y);
             }
         }); // the melonJS Text Logo
         var TextLogo = me.Renderable.extend({
@@ -69476,6 +69479,7 @@ exports.default = game = {
         me.input.bindKey(me.input.KEY.RIGHT, "right");
         me.input.bindKey(me.input.KEY.UP, "jump", true);
         me.input.bindKey(me.input.KEY.SPACE, "shoot", true);
+        me.input.bindKey(me.input.KEY.ESC, "close");
         me.state.change(me.state.PLAY);
     },
     reinitiateRetep () {
@@ -69546,6 +69550,8 @@ class NetCommunicator {
         this.onGameRequestAckReceived = ()=>{
         };
         this.onGameRequestRejectReceived = ()=>{
+        };
+        this.onGameClosedFired = ()=>{
         };
         this.playerName = playerName1;
         this.host = host;
@@ -69621,7 +69627,7 @@ class NetCommunicator {
         this.send(JSON.stringify(request));
     }
     exchangeGameData(gameData) {
-        if (this.state !== ClientState.BUSY) return;
+        if (this.state !== ClientState.BUSY && this.opponentId !== -1) return;
         let request = {
             type: "exchange_game_data",
             id: this.id,
@@ -69674,6 +69680,18 @@ class NetCommunicator {
             }
         };
         this.send(JSON.stringify(request));
+    }
+    doGameCloseRequest() {
+        if (this.state !== ClientState.BUSY) return;
+        let request = {
+            type: "game_close_request",
+            id: this.id
+        };
+        this.send(JSON.stringify(request));
+        this.onGameClosedFired();
+        this.state = ClientState.WAITING;
+        this.opponentId = -1;
+        this.opponentName = "";
     }
 }
 exports.default = NetCommunicator;
@@ -70326,6 +70344,10 @@ game.KektusThorn = me.Entity.extend({
         this.font.draw(renderer, game.playerName, -10, 0);
     },
     update: function(dt) {
+        if (me.input.isKeyPressed('close') && game.mode === "multiplayer") {
+            game.netCom.doGameCloseRequest();
+            me.state.change(me.state.GAME_END);
+        }
         if (game.mode === "multiplayer") {
             //put onNetUpdate, if you want to limit update rate
             if (this.updateCounter === 0) {
@@ -70891,5 +70913,5 @@ class StartParams {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"4N8i7"}]},["dTQGj","4Memt","fpYkd"], "fpYkd", "parcelRequire7cf7")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"4N8i7"}]},["dTQGj","4Memt","fpYkd"], "fpYkd", "parcelRequire5ca8")
 

@@ -70,17 +70,22 @@ wss.on("connection", function (ws: WebSocketClient) {
                     break;
                 case "game_initiation":                    
                     if(opponentId !== -1 && initiateGame(cm.id, opponentId)){
-                        //ws.send(JSON.stringify({type: "game_initiate_ack", data: true}));
+                        // game_initiation_ack has already been sent by initiateGame()
+                        broadcastAllPlayers();
                     }else{
                         ws.send(getErrorMessage("Game initiation was not successfull!"));
                     }
                     break;
-                case "close_game":
-                    if(cm.opponentId !== undefined && closeGame(cm.id, cm.opponentId)){
-                        ws.send(JSON.stringify({type: "close_game_confirmation", data: true}));
-                    }else{
-                        ws.send(getErrorMessage("Game closing was not successfull!"));
-                    }
+                //case "close_game":
+                //    if(cm.opponentId !== undefined && closeGame(cm.id, cm.opponentId)){
+                //        ws.send(JSON.stringify({type: "close_game_confirmation", data: true}));
+                //    }else{
+                //        ws.send(getErrorMessage("Game closing was not successfull!"));
+                //    }
+                //    break;
+                case "game_close_request":
+                    closeGame(cm.id);
+                    broadcastAllPlayers();
                     break;
                 case "game_request":
                 case "game_request_reject":
@@ -200,23 +205,17 @@ function initiateGame(initiatorId: number, opponentId: number): boolean{
     return true;
 }
 
-function closeGame(initiatorId: number, opponentId: number): boolean{
-    if(initiatorId === opponentId) return false;
+function closeGame(initiatorId: number): boolean{
 
     let initiator: Client | undefined = curClients.get(initiatorId);
-    let opponent: Client | undefined = curClients.get(opponentId);
 
-    if(initiator === undefined || opponent === undefined) return false;
-    if(opponent.opponent!.id !== initiatorId || initiator.opponent!.id !== opponentId) return false;  
-    if(opponent.state === ClientState.WAITING || initiator.state === ClientState.WAITING) return false;
+    if(initiator === undefined) return false;
+    if(initiator.state === ClientState.WAITING) return false;
 
     initiator.state = ClientState.WAITING;
-    opponent.state = ClientState.WAITING;
 
-    initiator.opponent = opponent;
-    opponent.opponent = initiator;
+    initiator.opponent = null;
 
-    opponent.ws.send(JSON.stringify({type: "close_game_confirmation", data: true}));
     return true;
 }
 
@@ -230,7 +229,7 @@ function forwardGameData(initiatorId: number, opponentId: number, data: any): vo
     if(opponent.opponent!.id !== initiatorId || initiator.opponent!.id !== opponentId) return;  
     if(opponent.state !== ClientState.BUSY || initiator.state !== ClientState.BUSY) return;
 
-    opponent.ws.send(JSON.stringify({type: "exchange_game_data", data: data}));
+    if(!opponent.ws.isClosed) opponent.ws.send(JSON.stringify({type: "exchange_game_data", data: data}));
 }
 
 function forwardChatData(initiatorId: number, data: any){

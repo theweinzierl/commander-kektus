@@ -36,6 +36,7 @@ class NetCommunicator{
     public onGameRequestReceived: (opponentId: number | undefined, data: any) => void = () => {}
     public onGameRequestAckReceived: (opponentId: number | undefined, data: any) => void = () => {}
     public onGameRequestRejectReceived: (opponentId: number | undefined, data: any) => void = () => {}
+    public onGameClosedFired: () => void = () => {}
 
     constructor(playerName: string, host: string){
         this.playerName = playerName;
@@ -121,7 +122,7 @@ class NetCommunicator{
     }
 
     exchangeGameData(gameData?: any): void{
-        if(this.state !== ClientState.BUSY) return;
+        if(this.state !== ClientState.BUSY && this.opponentId !== -1) return;
         let request: ClientMessage = {
             type: "exchange_game_data",
             id: this.id,
@@ -172,6 +173,19 @@ class NetCommunicator{
             data: {opponentName: playerName}
         };
         this.send(JSON.stringify(request));
+    }
+
+    doGameCloseRequest(): void{
+        if(this.state !== ClientState.BUSY) return;
+        let request: ClientMessage = {
+            type: "game_close_request",
+            id: this.id
+        };
+        this.send(JSON.stringify(request));
+        this.onGameClosedFired();
+        this.state = ClientState.WAITING;
+        this.opponentId = -1;
+        this.opponentName = "";
     }
 
 }

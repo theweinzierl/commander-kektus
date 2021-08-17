@@ -62,6 +62,11 @@ game.PlayerEntity = me.Entity.extend({
 
     update: function (dt) {
 
+        if(me.input.isKeyPressed('close') && game.mode === "multiplayer"){
+            game.netCom.doGameCloseRequest();
+            me.state.change(me.state.GAME_END);
+        }
+
         if(game.mode === "multiplayer"){
             //put onNetUpdate, if you want to limit update rate
             if(this.updateCounter === 0){      

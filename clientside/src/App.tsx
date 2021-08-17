@@ -30,6 +30,7 @@ function App() {
       startParams.host = host;
       startParams.netCommunicator = new NetCommunicator(startParams.playerName, startParams.host);
       startParams.netCommunicator.onOpponentConnected = onOpponentConnected;
+      startParams.netCommunicator.onGameClosedFired = onGameClosedFired;
       setStep(SubmitMode.ChatMode);
     } 
     
@@ -38,6 +39,10 @@ function App() {
   const onOpponentConnected = () => {
       setStep(SubmitMode.StartGame);
       startGame(startParams);
+  }
+
+  const onGameClosedFired = () => {
+    setStep(SubmitMode.ChatMode)
   }
 
   return (
