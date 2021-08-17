@@ -21,7 +21,7 @@ Eine Einführung in den Aufbau und die technischen Hintergründe findet Ihr unte
 ### 1. Clientside
 - Engine: melon.js (https://www.melonjs.org/)
 - Netzwerk: websocket-API (https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
-- Frontend: React
+- Frontend: React (https://reactjs.org/)
 - Bundler: Parcel2 (https://v2.parceljs.org/)
 
 Installation/Nutzung
