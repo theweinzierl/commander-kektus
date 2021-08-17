@@ -250,7 +250,7 @@ function forwardData(type: string, initiatorId: number, opponentId: number, data
 
     if(initiator === undefined || opponent === undefined) return;
 
-    opponent.ws.send(JSON.stringify({type: type, opponentId: initiatorId, data: data}));
+    if(!opponent.ws.isClosed) opponent.ws.send(JSON.stringify({type: type, opponentId: initiatorId, data: data}));
 }
 
 function getId(): number{
