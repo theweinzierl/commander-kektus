@@ -214,7 +214,7 @@ function closeGame(initiatorId: number): boolean{
 
     initiator.state = ClientState.WAITING;
 
-    initiator.opponent = null;
+    initiator.opponent = undefined;
 
     return true;
 }
