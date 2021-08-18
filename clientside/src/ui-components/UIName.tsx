@@ -9,7 +9,7 @@ export default function UIName(props: any) {
     const playerName: string = (document.getElementById('playerName') as HTMLInputElement).value
 
     const regex: RegExp = new RegExp('\w+')
-    console.log(regex.test('dsfsd')
+    console.log(regex.test('dsfsd') + ' ' +  playerName)
     if (regex.test(playerName)) {
       props.submit(playerName)
     } else {
