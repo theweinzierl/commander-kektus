@@ -1,7 +1,6 @@
 import me from 'melonjs';
 import game from './game';
 import resources from './resources';
-import title from './screens/title';
 import play from './screens/play';
 import enemies from './entities/enemies';
 import hero from './entities/hero';
