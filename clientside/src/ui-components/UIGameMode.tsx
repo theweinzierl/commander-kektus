@@ -17,7 +17,7 @@ export default function UIGameMode(props: any) {
       
       const regex: RegExp = new RegExp('[w][s][s][:][\/][\/]\w+([.]|w)\w+[.]\w+[:]\d');
       
-      if (regex.test(regex)) {
+      if (!regex.test(regex)) {
         props.submit(GameMode.multiplayer, host)
       } else {
         setValidInput(false)
