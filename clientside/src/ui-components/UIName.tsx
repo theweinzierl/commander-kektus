@@ -8,7 +8,9 @@ export default function UIName(props: any) {
   const submit = () => {
     const playerName: string = (document.getElementById('playerName') as HTMLInputElement).value
 
-    if (playerName !== '') {
+    const regex: RegExp = new RegExp('w+');
+    
+    if (!regex.test(playerName)) {
       props.submit(playerName)
     } else {
       setValidInput(false)
@@ -25,7 +27,7 @@ export default function UIName(props: any) {
           <TextField
             error
             id="playerName"
-            helperText="Tell us who you are."
+            helperText="Tell us with a valid name who you are."
             variant="outlined"
           />
         )}
