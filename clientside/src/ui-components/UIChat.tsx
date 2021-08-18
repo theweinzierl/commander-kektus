@@ -63,12 +63,13 @@ export default function UIChat(props: any) {
   }
 
   const renderPlayers = () => {
-    let players: ReactElement[] = members.map((element: any) => {
+    let players: ReactElement[] = members.map((element: any, index: number) => {
       return (
         <li
           onClick={() => {
             doGameRequest(element.id)
           }}
+          key={index}
         >
           {element.name}
         </li>
