@@ -125,7 +125,7 @@ export default function UIChat(props: any) {
         />
       </div>
       <div className="w3-row w3-padding">
-        <Button autofocus variant="contained" color="primary" onClick={send}>
+        <Button autoFocus variant="contained" color="primary" onClick={send}>
           Send
         </Button>
       </div>
