@@ -51,7 +51,7 @@ game.Retep = me.Entity.extend({
     },
 
     onNetworkUpdate: function (data){
-        this.pos.x = data.posX;
+        this.pos.x = data.posX + 16;
         this.pos.y = data.posY;
         this.setMyCurrentAnimation(data.currentAnimation);
     },
