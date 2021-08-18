@@ -14,8 +14,10 @@ export default function UIGameMode(props: any) {
   const submit = () => {
     if (selection === GameMode.multiplayer) {
       const host: string = (document.getElementById('host') as HTMLInputElement).value
-
-      if (host !== '') {
+      
+      const regex: RegExp = new RegExp('[w][s][s][:][\/][\/]\w+([.]|w)\w+[.]\w+[:]\d');
+      
+      if (regex.test(regex)) {
         props.submit(GameMode.multiplayer, host)
       } else {
         setValidInput(false)
@@ -62,7 +64,7 @@ export default function UIGameMode(props: any) {
               error
               id="host"
               label=""
-              helperText="Please enter a valid host-adress."
+              helperText="Please enter a valid host-adress (wss://*address*:*port*."
               variant="outlined"
             />
           )}
@@ -70,7 +72,7 @@ export default function UIGameMode(props: any) {
       )}
       <div className="w3-row w3-padding">
         <Button variant="contained" color="primary" onClick={submit}>
-          enroll for battle
+          move forward
         </Button>
       </div>
     </div>
