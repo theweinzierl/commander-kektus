@@ -10,7 +10,7 @@ export default function UIName(props: any) {
 
     const regex: RegExp = new RegExp('w+');
     
-    if (!regex.test(playerName)) {
+    if (regex.test(playerName)) {
       props.submit(playerName)
     } else {
       setValidInput(false)
