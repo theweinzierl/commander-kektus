@@ -8,7 +8,7 @@ export default function UIName(props: any) {
   const submit = () => {
     const playerName: string = (document.getElementById('playerName') as HTMLInputElement).value
 
-    const regex: RegExp = new RegExp('w+');
+    const regex: RegExp = new RegExp('\w+');
     
     if (regex.test(playerName)) {
       props.submit(playerName)
