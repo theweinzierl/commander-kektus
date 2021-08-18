@@ -47,9 +47,9 @@ export default function UIChat(props: any) {
   netCom.onGameRequestAckReceived = onGameRequestAckReceived
 
   const renderChat = () => {
-    let chatMessages: ReactElement[] = chatData.map((element: any) => {
+    let chatMessages: ReactElement[] = chatData.map((element: any, index: number) => {
       return (
-        <li>
+        <li key={index}>
           <b>{element.from}: </b> {element.content}
         </li>
       )
