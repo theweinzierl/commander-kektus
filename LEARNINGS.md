@@ -24,6 +24,8 @@ Nach Recherche im Internet, haben wir uns für eine Melon.js entschieden, weil:
 
 - Die Unterstützung der Sound-API, mit der Soundeffekte sowie Hintergrundmusik mit herausragender Einfachheit hinzufügen werden können.
 
+- Melon.js ist leichtgewichtig und mit den gängigsten Browsern kompatibel.
+
 ## https, wws und certBot
 
 Während der Nutzung des Spiels werden keine sensiblen Daten übertragen, weshalb es aus diesem Grund nicht unbedingt notwendig gewesen wäre, eine sichere Verbindung zu unserem Server aufzubauen. Da wir allerdings Websockets nutzen und einige Browser unsichere Websocket-Verbindungen nur auf dem Localhost zulassen, haben wir uns für den Einsatz eines Zertifikates entschieden. Zunächst haben wir dabei einfach mit einem selbstsigniertem Zertifikat gearbeitet, doch dies erforderte den relativ aufwendigen Prozess des manuellen Akzeptierens. Das ist im Entwicklungsprozess noch hinnehmbar, aber spätestens im Produktivbetrieb nicht tolerabel - zumal manche Browser, aus gutem Grund, teilweise sehr restriktive Einstellungen hinsichtlich selbstsignierten Zertifikaten haben.
