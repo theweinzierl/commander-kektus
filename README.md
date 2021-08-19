@@ -50,7 +50,7 @@ Wenn noch nicht geschehen: clone und cd nach ./serverside/ . Dann:
 deno run --allow-net --allow-read ./server.ts 
 ```
 
-ACHTUNG: Zur Ausführung des Game-Servers wird ein Zertifikat und ein Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
+**ACHTUNG:** Zur Ausführung des Game-Servers wird ein Zertifikat und ein Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
 - https://*meine-deno-server-ip*:8080
 
 separat als Ausnahme hinzugefügt werden. Legt die beiden Dateien als fullchain.pem und privkey.pem in Eurem Home-Verzeichnis ab und erstellt entsprechende Hardlinks im serverside-Verzeichnis.
