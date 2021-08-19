@@ -45,7 +45,7 @@ und setzt Deno und das websocket-Modul ein (https://deno.land/x/websocket@v0.1.1
 
 #### Installation/Nutzung
 
-Wenn noch nicht geschehen: clone und cd nach /serverside/ . Dann:
+Wenn noch nicht geschehen: clone und cd nach ./serverside/ . Dann:
 ```shell
 deno run --allow-net --allow-read ./server.ts 
 ```
