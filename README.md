@@ -41,7 +41,7 @@ Der Multiplayer-Server erfüllt folgende Funktionen
 - Datenaustausch
 - Chat
 
-und setzt Deno und das websocket-Modul ein (https://deno.land/x/websocket@v0.1.1)
+und setzt Deno und das websocket-Modul ein (https://deno.land/x/websocket@v0.1.1).
 
 #### Installation/Nutzung
 
