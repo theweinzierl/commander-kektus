@@ -24,7 +24,7 @@ Eine Einführung in den Aufbau und die technischen Hintergründe findet Ihr unte
 - Frontend: React (https://reactjs.org/)
 - Bundler: Parcel2 (https://v2.parceljs.org/)
 
-Installation/Nutzung
+#### Installation/Nutzung
 ```shell
 git clone https://github.com/theweinzierl/commander-kektus && \
 cd commander-kektus/clientside && \
@@ -43,14 +43,14 @@ Der Multiplayer-Server erfüllt folgende Funktionen
 
 und setzt Deno und das websocket-Modul ein (https://deno.land/x/websocket@v0.1.1)
 
-Installation/Nutzung
+#### Installation/Nutzung
 
 Wenn noch nicht geschehen: clone und cd nach /serverside/ . Dann:
 ```shell
 deno run --allow-net --allow-read ./server.ts 
 ```
 
-ACHTUNG: Zur Ausführung des Game-Servers wird ein Zertifikat und Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
+ACHTUNG: Zur Ausführung des Game-Servers wird ein Zertifikat und ein Private-Key benötigt. Diese können selbst erstellt sein. Unter Umständen muss dann aber im Browser das Zertifikat unter
 - https://*meine-deno-server-ip*:8080
 
-separat als Ausnahme hinzugefügt werden. Legt die beiden Dateien mit als fullchain.pem und privkey.pem in Eurem Home-Verzeichnis ab und erstellt entsprechende Hardlinks im serverside-Verzeichnis.
+separat als Ausnahme hinzugefügt werden. Legt die beiden Dateien als fullchain.pem und privkey.pem in Eurem Home-Verzeichnis ab und erstellt entsprechende Hardlinks im serverside-Verzeichnis.
